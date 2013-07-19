@@ -10,6 +10,10 @@ This software distribution consists of:
 
 - The AIL Implementation of the GOAL BDI agent programming language.
 
+- The AIL Implementation of the OOPL Organisational Programming language.
+
+- The AIL Implementation of Random - a language for agent's that act "at random"
+
 src/classes and src/main contains the core classes for each of these libraries 
    - when Java Pathfinder is being used the classes in src/classes run in the JPF virtual machine while those in src/main run in the native virtual machine
    

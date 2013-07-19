@@ -1,0 +1,50 @@
+// ----------------------------------------------------------------------------
+// Copyright (C) 2012 Louise A. Dennis, and Nick Tinnemeier
+//
+// This file is part of OOPL
+// 
+// OOPL is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 3 of the License, or (at your option) any later version.
+// 
+// OOPL is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public
+// License along with OOPL; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+// 
+// To contact the authors:
+// http://www.csc.liv.ac.uk/~lad
+//
+//----------------------------------------------------------------------------
+
+:name: org 
+:Brute Facts:  
+down(1) down(2) down(3) 	
+food(1) food(2) food(3) 
+agent(ag1,1) agent(ag2,2) agent(ag3,3) 
+
+:Effect Rules:	
+{agent(A,I), down(I)} does(A,pur) {-down(I), hold(I,r), return(u)} 
+{agent(A,I), -down(I)} does(A,pur) {return(d)} 
+{agent(A, I), hold(I,r)} does(A,pdr) {down(I), -hold(I,r)}   
+{agent(A, I), down(((I % 3) + 1))} does(A, pul) {-down(((I % 3) + 1)), hold(I, l), return(u)} 
+{agent(A, I), -down(((I % 3) + 1))} does(A, pul) {return(d)}
+{agent(A,I), hold(I,l)} does(A,pdl) {down(((I % 3) + 1)), -hold(I,l)} 
+{agent(A,I), hold(I,r), hold(I,l), food(I)} does(A,eat) {-food(I), return(yes)}	
+{agent(A,I), -food(I)} does(A,eat) {return(no)} 
+
+:CountsAs Rules: 
+{-hold(3,r), hold(3,l), food(3)} {-viol(3)} => {viol(3)} 
+{hold(2,r), -hold(2,l), food(2)} {-viol(2)} => {viol(2)} 
+{agent(A,I),-food(I),-hold(I,r),-hold(I,l)} {-reward(I)} => {reward(I)} 
+{-hold(1,r), hold(1,l), food(1)} {-viol(1)} => {viol(1)} 
+
+:Sanction Rules: 
+
+{viol(A)} => {-food(A), punished(A)} 
+{reward(A)} => {food(A), rewarded(A)}
