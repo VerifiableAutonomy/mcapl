@@ -461,7 +461,7 @@ public class LegoRoverEnvironment_RuleP extends EASSNXTEnvironment {
 				
 				RemoteMotor motorLeft = brick.getMotorC();
 				RemoteMotor motorRight = brick.getMotorA();
-				pilot = new  DifferentialPilot(3, 15, motorLeft, motorRight);
+				pilot = new  DifferentialPilot(5.5, 10.25, motorLeft, motorRight);
 				pilot.setTravelSpeed(10);
 				pilot.setRotateSpeed(15);
 				setPilot(pilot);
