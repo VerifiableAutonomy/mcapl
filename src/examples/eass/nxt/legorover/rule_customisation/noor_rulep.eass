@@ -66,11 +66,11 @@ light_threshold(50)
     forward;
 
 +change_distance(D) : {B distance_threshold(D1)} <-
-    ±distance_threshold(D);
+    Â±distance_threshold(D);
 +change_volume(D) : {B sound_threshold(D1)} <-
-    ±sound_threshold(D);
+    Â±sound_threshold(D);
 +change_intensity(D) : {B light_threshold(D1)} <-
-    ±light_threshold(D);
+    Â±light_threshold(D);
 
 :name: noor
 

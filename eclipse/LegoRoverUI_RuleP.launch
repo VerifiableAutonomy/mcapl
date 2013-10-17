@@ -9,5 +9,4 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="eass.nxt.legorover.rule_customisation.LegoRoverUI_RuleP"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="mcapl"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-d32"/>
 </launchConfiguration>
