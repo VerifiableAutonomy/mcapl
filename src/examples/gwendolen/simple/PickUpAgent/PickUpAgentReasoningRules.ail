@@ -26,4 +26,5 @@ env = gwendolen.simple.SimpleEnv
 mas.file = /src/examples/gwendolen/simple/PickUpAgent/pickupagent_wReasoningRules.gwen
 mas.builder = gwendolen.GwendolenMASBuilder
 
+log.fine = ail.semantics.AILAgent
 log.warning = ail.mas.DefaultEnvironment
