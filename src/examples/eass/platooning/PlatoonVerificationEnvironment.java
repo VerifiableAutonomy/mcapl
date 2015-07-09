@@ -104,14 +104,14 @@ public class PlatoonVerificationEnvironment extends EASSVerificationEnvironment 
 	public Set<Message> generate_messages() {
 		TreeSet<Message> messages = new TreeSet<Message>();
 
-//		boolean assert_set_spacing_goal = random_generator.nextBoolean();
-//		if(assert_set_spacing_goal){
-		if(assert_set_spacing_goal_once){
+		boolean assert_set_spacing_goal = random_generator.nextBoolean();
+		if(assert_set_spacing_goal){
+//		if(assert_set_spacing_goal_once){
 			Predicate set_spacing_goal = new Predicate("set_spacing");
 			set_spacing_goal.addTerm(new NumberTermImpl(17));
 			messages.add(new Message(EASSAgent.ACHIEVE, "leader", "follower3", set_spacing_goal));
 			AJPFLogger.info(logname, "assert_set_spacing_goal");
-			assert_set_spacing_goal_once=false;
+//			assert_set_spacing_goal_once=false;
 		}else{
 			AJPFLogger.info(logname, "Not assert_set_spacing_goal");
 		}

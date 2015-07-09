@@ -9,7 +9,7 @@
 platoon_m(X, Y):- platoon_m, success_ack;
 //platoon_m(X, Y):- sp_contr, steering_contr, platoon_m, success_ack;
 
-leave_platoon:- ~steering_contr, no_platoon_m;
+leave_platoon:- ~steering_contr, no_platoon_m, leave_ok;
 
 steering_cont(1):- steering_contr;
 
@@ -40,6 +40,7 @@ set_spacing(X):- ack_spacing(X);
 				 ~G set_spacing(X) [achieve]}
 				 <- 
 				-leave_agreement(follower3),
+				-ready_ok,
 		 		+!leave_platoon [achieve];
 
 +ready_to_leave: {B name(follower3), 
@@ -185,7 +186,7 @@ set_spacing(X):- ack_spacing(X);
 	
 +!set_spacing(X2) [achieve]: {G leave_platoon [achieve],
 							B name(K),
-							B leave_agreement(K)} 
+							B leave_agreement(K), ~B leave_ok} 
 							<- 
 							*leave_platoon;  
 							
@@ -373,5 +374,6 @@ set_spacing(X):- ack_spacing(X);
 						   ~B sp_contr, 
 						   ~B steering_contr}
 						   <- 
-						   .send(leader, :tell, message(X, 2)), 
+						   .send(leader, :tell, message(X, 2)),
+						   +leave_ok, 
 						   *no_platoon_m;

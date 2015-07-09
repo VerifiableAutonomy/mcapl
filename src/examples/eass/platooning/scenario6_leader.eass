@@ -12,18 +12,18 @@ max_length(2) //maximum platoon length
 last_vehicle(Y):- platoon_m(X,Y), ~platoon_m(Y,Z);
 no_platoon_m(X):- ~platoon_m(X, Y), ~platoon_m(Z, X); 
 //platoon_m(Y, 0):- update_last_v, last_vehicle(Y);
-platoon_full(X):- max_length(X), X==2, 
+platoon_full(X):- max_length(X), max_length(2), 
 				  platoon_m(I,J),
 				  platoon_m(J,K),
 				  last_vehicle(K);
 				  
-platoon_full(X):- max_length(X), X==3, 
+platoon_full(X):- max_length(X), max_length(3), 
 				  platoon_m(I,J),
 				  platoon_m(J,K),
 				  platoon_m(K,L),
 				  last_vehicle(L);
 
-platoon_full(X):- max_length(X), X==4, 
+platoon_full(X):- max_length(X), max_length(4), 
 				  platoon_m(I,J),
 				  platoon_m(J,K),
 				  platoon_m(K,L),
@@ -155,6 +155,12 @@ platoon_full(X):- max_length(X), X==4,
 							  <- 
 							  print(something_is_wrong_sender_already_in_platoon);
 
+
+// =========== if a vehicle reject set_spacing request form the leader, the leader will try again =============================
++set_spacing_from_failed(X, SENDER): {True}<- .send(SENDER, :achieve, set_spacing(X)), *message(SENDER, 2);
+
+
+
 // ============== SENDER request to join to platoon and leader sets a goal to have SENDER in platoon =================
 // set spacing for joining, FRONT vehicle should increase space
 +!platoon_m(SENDER, FRONT) [achieve]: {~B set_spacing_from(FRONT), 
@@ -264,4 +270,7 @@ platoon_full(X):- max_length(X), X==4,
 							 <-
 							 .send(SENDER, :tell, no_platoon_m),
 							 -platoon_m(J, SENDER);
+		 						
+		 						
+		 						
 		 						
