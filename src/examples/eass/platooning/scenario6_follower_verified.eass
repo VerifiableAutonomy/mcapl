@@ -4,6 +4,11 @@
 
 :Initial Beliefs:
 
+id(3)
+name(follower3)
+name_front(follower1)
+
+
 :Reasoning Rules:
 
 platoon_m(X, Y):- name(X), platoon_ok;
@@ -12,8 +17,10 @@ platoon_m(X, Y):- name(X), platoon_ok;
 leave_platoon:- leave_ok;
 
 steering_cont(1):- steering_contr;
-
 steering_cont(0):- ~ steering_contr;
+
+speed_contr(0):- ~sp_contr;
+speed_contr(1):- sp_contr;
 
 set_spacing(X):- ack_spacing(X);
 // set_spacing(X):- spacing(X), spacing, ack_spacing(X);
@@ -35,9 +42,11 @@ set_spacing(X):- ack_spacing(X);
 +id_front(X): {B id(3)}<- perf(join_position(X));
 
 +ready_to_leave: {B name(follower3), 
+				 B name_front(FRONT),
 				 ~G platoon_m(follower3, FRONT) [achieve],
 				 ~G leave_platoon [achieve],
-				 ~G set_spacing(X) [achieve]}
+				 ~G set_spacing(X) [achieve],
+				 B platoon_m(follower3, FRONT)}
 				 <- 
 				-leave_agreement(follower3),
 				-leave_ok,
@@ -66,7 +75,7 @@ set_spacing(X):- ack_spacing(X);
 				B name_front(FRONT), 
 				~G leave_platoon [achieve], 
 				~B steering_contr, 
-				~B platoon_m, 
+				~B platoon_m(follower3, FRONT), 
 				~G platoon_m(follower3, FRONT) [achieve]} 
 				<- 
 				-join_agreement(follower3, FRONT),
@@ -192,8 +201,10 @@ set_spacing(X):- ack_spacing(X);
 
 +!set_spacing(X1) [achieve]: {B name(K), ~B platoon_m(K, F)}
 							<- 
+							+.lock,
 							.send(leader, :tell, set_spacing_from_failed(X1, K)),
-							-!set_spacing(X1) [achieve];
+							-!set_spacing(X1) [achieve],
+							-.lock;
 	
 +!set_spacing(X2) [achieve]: {B platoon_m(K, F),
 							G leave_platoon [achieve],
