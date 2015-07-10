@@ -201,10 +201,10 @@ set_spacing(X):- ack_spacing(X);
 
 +!set_spacing(X1) [achieve]: {B name(K), ~B platoon_m(K, F)}
 							<- 
-							+.lock,
-							.send(leader, :tell, set_spacing_from_failed(X1, K)),
-							-!set_spacing(X1) [achieve],
-							-.lock;
+//							+.lock,
+//							.send(leader, :tell, set_spacing_from_failed(X1, K)),
+							-!set_spacing(X1) [achieve];
+//							-.lock;
 	
 +!set_spacing(X2) [achieve]: {B platoon_m(K, F),
 							G leave_platoon [achieve],
