@@ -180,7 +180,8 @@ out_of_memory: 			[]( G(follower3, leave_platoon)
 						<>D(follower3, perf(speed_controller(0)))
 						)
 
-test: ( 		
+test: ( G(follower3, set_spacing(17))
+		&		
 		[](B(follower3, spacing(17))-> <>D(follower3, perf(set_spacing(17))))			
 		&
 		[](D(follower3, perf(set_spacing(17)))-> <>B(follower3, spacing))
