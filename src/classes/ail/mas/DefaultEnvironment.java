@@ -34,9 +34,9 @@ import java.util.Map;
 import java.util.HashSet;
 
 import gov.nasa.jpf.annotation.FilterField;
-
 import ail.util.AILexception;
 import ail.util.AILConfig;
+import ail.mas.scheduling.ActionScheduler;
 import ail.semantics.AILAgent;
 import ail.syntax.Unifier;
 import ail.syntax.Message;
@@ -50,7 +50,6 @@ import ail.syntax.NumberTerm;
 import ail.syntax.StringTerm;
 import ail.syntax.StringTermImpl;
 import ail.syntax.Predicate;
-
 import ajpf.util.VerifySet;
 import ajpf.util.VerifyMap;
 import ajpf.PerceptListener;
@@ -113,6 +112,15 @@ public class DefaultEnvironment implements AILEnv {
 	 */
 	protected MCAPLScheduler scheduler;
 	
+	/**
+	 * The multi-agent system this environment is part of.
+	 */
+	protected MAS mas;
+	
+	/**
+	 * Name for logging.
+	 */
+	@FilterField
 	String logname = "ail.mas.DefaultEnvironment";
 	
 	/**
@@ -191,10 +199,7 @@ public class DefaultEnvironment implements AILEnv {
     	
     	// Some basic actions you might expect all environments to support
     	if (act instanceof SendAction) {
-    		SendAction sent = (SendAction) act;
-    		Message m = sent.getMessage(agName);
-    		String r = m.getReceiver();
-    		addMessage(r, m);
+    		executeSendAction(agName, (SendAction) act);
     	} 
     	
     	if (act.getFunctor().equals("sum")) {
@@ -288,7 +293,18 @@ public class DefaultEnvironment implements AILEnv {
     	return act.toString();
     	
     }
-    
+
+     /**
+      * Default method for sending messages.  Simply adds the message to the receiver's inbox.
+      * @param agName
+      * @param act
+      */
+     public void executeSendAction(String agName, SendAction act) {
+ 		Message m = act.getMessage(agName);
+ 		String r = m.getReceiver();
+ 		addMessage(r, m);   	 
+     }
+     
     /**
      * Overridable method for printing illocutionary forces.
      * @param ilf
@@ -674,5 +690,20 @@ public class DefaultEnvironment implements AILEnv {
 	public Unifier actionResult(String agName, Action act) {
 		return null;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ail.mas.AILEnv#setMAS(ail.mas.MAS)
+	 */
+	@Override
+	public void setMAS(MAS m) {
+		mas = m;
+	}
+	
+	public static void setup_scheduler(AILEnv env, MCAPLScheduler s) {
+		env.setScheduler(s);
+		env.addPerceptListener(s);
+	}
+
 
 }
