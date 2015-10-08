@@ -28,8 +28,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import eass.mas.EASSEnv;
-import ail.mas.NActionScheduler;
-import ail.mas.SingleAgentScheduler;
+import ail.mas.scheduling.NActionScheduler;
+import ail.mas.scheduling.SingleAgentScheduler;
 import ail.syntax.Action;
 import ail.syntax.Literal;
 import ail.syntax.Message;

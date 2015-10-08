@@ -107,7 +107,7 @@ public class LeaderVerificationEnvironment extends EASSVerificationEnvironment {
 		TreeSet<Message> messages = new TreeSet<Message>();		
 
 
- 		int assertM = random_generator.nextInt(16);
+ 		int assertM = random_int_generator.nextInt(16);
 		if (assertM == 0) {
 			messages.add(join_message);
 			AJPFLogger.info(logname, "assert_join_request");

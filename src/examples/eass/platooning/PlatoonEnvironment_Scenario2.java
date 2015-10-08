@@ -2,8 +2,8 @@ package eass.platooning;
 
 import java.util.Random;
 
-import ail.mas.ActionScheduler;
-import ail.mas.NActionScheduler;
+import ail.mas.scheduling.ActionScheduler;
+import ail.mas.scheduling.NActionScheduler;
 import ail.syntax.Action;
 import ail.syntax.Literal;
 import ail.syntax.NumberTerm;

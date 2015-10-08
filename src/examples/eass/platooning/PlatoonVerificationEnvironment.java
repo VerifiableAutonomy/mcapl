@@ -40,8 +40,8 @@ public class PlatoonVerificationEnvironment extends EASSVerificationEnvironment 
 		AJPFLogger.info(logname, "name_front_follower1");
 */
 		
-		boolean assert_join = random_generator.nextBoolean();
-		boolean assert_leave = random_generator.nextBoolean();
+		boolean assert_join = random_bool_generator.nextBoolean();
+		boolean assert_leave = random_bool_generator.nextBoolean();
 		if(assert_join && !assert_leave){
 			percepts.add(new Predicate("ready_to_join"));
 			AJPFLogger.info(logname, "assert ready_to_join");
@@ -57,7 +57,7 @@ public class PlatoonVerificationEnvironment extends EASSVerificationEnvironment 
 		}
 
 		
-		boolean assert_change_lane = random_generator.nextBoolean();
+		boolean assert_change_lane = random_bool_generator.nextBoolean();
 		if(assert_change_lane){
 			percepts.add(new Literal("changed_lane"));
 			AJPFLogger.info(logname, "assert_changed_lane");
@@ -65,7 +65,7 @@ public class PlatoonVerificationEnvironment extends EASSVerificationEnvironment 
 			AJPFLogger.info(logname, "No assert_changed_lane");			
 		}
 
-		boolean assert_init_dis = random_generator.nextBoolean();
+		boolean assert_init_dis = random_bool_generator.nextBoolean();
 		if(assert_init_dis){
 			percepts.add(new Literal("initial_distance"));
 			AJPFLogger.info(logname, "assert_initial_distance");
@@ -74,8 +74,8 @@ public class PlatoonVerificationEnvironment extends EASSVerificationEnvironment 
 		}
 
 		
-		boolean assert_spacing_x = random_generator.nextBoolean();
-		boolean assert_spacing = random_generator.nextBoolean();
+		boolean assert_spacing_x = random_bool_generator.nextBoolean();
+		boolean assert_spacing = random_bool_generator.nextBoolean();
 
 		if(assert_spacing_x){
 			Predicate spacing_x = new Predicate("spacing");
@@ -105,7 +105,7 @@ public class PlatoonVerificationEnvironment extends EASSVerificationEnvironment 
 	public Set<Message> generate_messages() {
 		TreeSet<Message> messages = new TreeSet<Message>();
 
-		boolean assert_set_spacing_goal = random_generator.nextBoolean();
+		boolean assert_set_spacing_goal = random_bool_generator.nextBoolean();
 		if(assert_set_spacing_goal){
 //		if(assert_set_spacing_goal_once){
 			Predicate set_spacing_goal = new Predicate("set_spacing");
@@ -118,8 +118,8 @@ public class PlatoonVerificationEnvironment extends EASSVerificationEnvironment 
 		}
 		
 
-		boolean assert_join_agreement = random_generator.nextBoolean();
-		boolean assert_leave_agreement = random_generator.nextBoolean();
+		boolean assert_join_agreement = random_bool_generator.nextBoolean();
+		boolean assert_leave_agreement = random_bool_generator.nextBoolean();
 		if (assert_join_agreement && !assert_leave_agreement) {
 			Predicate join_agreement = new Predicate("join_agreement");
 			join_agreement.addTerm(new Literal("follower3"));
@@ -140,8 +140,8 @@ public class PlatoonVerificationEnvironment extends EASSVerificationEnvironment 
 		}
 
 		
-		boolean assert_platoon_m = random_generator.nextBoolean();
-		boolean assert_no_platoon_m = random_generator.nextBoolean();
+		boolean assert_platoon_m = random_bool_generator.nextBoolean();
+		boolean assert_no_platoon_m = random_bool_generator.nextBoolean();
 		if (assert_platoon_m && !assert_no_platoon_m) {
 			messages.add(new Message(EASSAgent.TELL, "leader", "follower3", new Predicate("platoon_m")));
 			AJPFLogger.info(logname, "assert_platoon_m");

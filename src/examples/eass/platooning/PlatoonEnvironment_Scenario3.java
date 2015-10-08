@@ -3,8 +3,8 @@ package eass.platooning;
 import java.util.Random;
 
 import eass.mas.DefaultEASSEnvironment;
-import ail.mas.ActionScheduler;
-import ail.mas.NActionScheduler;
+import ail.mas.scheduling.ActionScheduler;
+import ail.mas.scheduling.NActionScheduler;
 import ail.syntax.Literal;
 import ail.syntax.NumberTermImpl;
 import ajpf.util.AJPFLogger;

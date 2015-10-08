@@ -2,7 +2,7 @@ package eass.platooning;
 
 import java.util.ArrayList;
 
-import ail.mas.NActionScheduler;
+import ail.mas.scheduling.NActionScheduler;
 import eass.platooning.util.Vehicle;
 import ail.syntax.Action;
 import ail.syntax.Literal;

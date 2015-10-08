@@ -12,14 +12,10 @@
 /* Default plans for handling messages */
 +.received(:tell, B): {True} <- +B;   
 
-+message(SENDER, 1, FRONT): {True} <- +.lock, .send(FRONT, :achieve, set_spacing(17)), -message(SENDER, 1, FRONT), +spacing17, +join(SENDER, FRONT), -.lock;
-
-+set_spacing_from(FRONT): {B join(SENDER, FRONT), B spacing17} <- +.lock, .send(SENDER, :tell, join_agreement(SENDER, FRONT)), -set_spacing_from(FRONT), -spacing17, -.lock;
++message(SENDER, 1, FRONT): {True} <- +.lock, -message(SENDER, 1, FRONT), .send(SENDER, :tell, join_agreement(SENDER, FRONT)), -.lock;
 		 								 						
-+message(SENDER, 2): {B join(SENDER, FRONT), ~B leave} <- +.lock, .send(FRONT, :achieve, set_spacing(6)), +spacing6, -set_spacing_from(FRONT), -.lock;
++message(SENDER, 2): {~B leave} <- +.lock, .send(SENDER,:tell, platoon_m), -message(SENDER, 2), -.lock;
 
-+set_spacing_from(FRONT): {B join(SENDER, FRONT), B spacing6} <- +.lock, .send(SENDER,:tell, platoon_m), -set_spacing_from(FRONT), -spacing6, -join(SENDER, FRONT), -.lock;
-		 	
 +message(SENDER, 0)	: {True} <- +.lock, .send(SENDER, :achieve, set_spacing(17)), +leave, -.lock, *set_spacing_from(SENDER);
 
 +set_spacing_from(SENDER): {B leave} <- +.lock, .send(SENDER, :tell, leave_agreement(SENDER)), -set_spacing_from(SENDER), -.lock, *message(SENDER, 2);	
