@@ -26,29 +26,12 @@
 @using = mcapl
 
 target = ail.util.AJPF_w_AIL
-target.args =src/examples/eass/verification/platoon/platoon.ail,src/examples/eass/verification/platoon/platoon.psl,modified_req4-2
+target.args =src/examples/eass/verification/platoon/leader.ail,src/examples/eass/verification/platoon/leader.psl,joining_success
 
-log.info = ail.mas.DefaultEnvironment,eass.mas.verification.EASSVerificationEnvironment,eass.platooning.PlatoonVerificationEnvironment,ajpf.product.Product
+log.info = ail.mas.DefaultEnvironment,eass.mas.verification.EASSVerificationEnvironment,eass.platooning.LeaderVerificationEnvironment,ajpf.product.Product
 //log.fine = ail.semantics.AILAgent
 
 listener+=,.listener.ExecTracker
 et.print_insn=false
 et.show_shared=false
 
-// vm.storage.class=gov.nasa.jpf.vm.DebugJenkinsStateSet
-
-// ====================================================== results
-// no errors detected
-// 
-// ====================================================== statistics
-// elapsed time:       >3:10:17
-// states:             new=57387,visited=432459,backtracked=489846,end=460
-// search:             maxDepth=394,constraints=0
-// choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=57382
-// heap:               new=17842729715,released=17851009268,maxLive=7782,gcCycles=489846
-// instructions:       3035821474589
-// max memory:         6062MB
-// loaded code:        classes=341,methods=5204
-
-// ====================================================== search finished: 16/08/15 08:33
-// started 10 Augst 9:23:06

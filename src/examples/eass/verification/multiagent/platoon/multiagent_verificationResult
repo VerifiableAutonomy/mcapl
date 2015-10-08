@@ -1,0 +1,82 @@
+
+agr: [] G(follower3, platoon_m(follower3, follower1)) & 
+	 (
+		[] ItD(follower3, send(leader, 1, message(follower3, 1, follower1))) 
+		->
+		<>B(follower3, join_agreement(follower3, follower1))
+	)
+
+====================================================== results
+no errors detected
+
+====================================================== statistics
+elapsed time:       14:55:38
+states:             new=87628,visited=180817,backtracked=268445,end=0
+search:             maxDepth=73,constraints=0
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=87628
+heap:               new=3231801885,released=3236292789,maxLive=9698,gcCycles=268445
+instructions:       245436124657
+max memory:         4193MB
+loaded code:        classes=346,methods=5255
+
+====================================================== search finished: 29/09/15 08:03
+
+started 28.09.15 17:08:03
+
+
+-------------------------------
+
+check_failure: G(follower3, platoon_m(follower3, follower1)) & 
+		( [] D(follower3, perf(join_ok(1))) -> <> B(follower3, changed_lane) )
+		->
+		<> B(follower3, platoon_m)
+
+
+====================================================== results
+no errors detected
+
+====================================================== statistics
+elapsed time:       11:21:27
+states:             new=82533,visited=170553,backtracked=253086,end=0
+search:             maxDepth=73,constraints=0
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=82533
+heap:               new=1535041746,released=1539280670,maxLive=9668,gcCycles=253086
+instructions:       198553404522
+max memory:         3671MB
+loaded code:        classes=348,methods=5271
+
+====================================================== search finished: 29/09/15 04:55
+
+-------------------------------
+
+
+change_lanefailsuccess: [] G(follower3, platoon_m(follower3, follower1)) & 
+						(
+						[] D(follower3, perf(join_ok(1)))
+						->
+						(<> G(follower3, speed_controller(1)) || []~B(follower3, changed_lane) )
+						)
+
+
+====================================================== results
+no errors detected
+
+====================================================== statistics
+elapsed time:       10:19:03
+states:             new=105343,visited=215744,backtracked=321087,end=0
+search:             maxDepth=87,constraints=0
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=105343
+heap:               new=2004228095,released=2010134115,maxLive=9747,gcCycles=321087
+instructions:       267873474701
+max memory:         3942MB
+loaded code:        classes=349,methods=5363
+
+====================================================== search finished: 29/09/15 19:52
+
+started 29/09/15 09:33:07
+
+-------------------------------
+
+
+						
+						

@@ -26,9 +26,9 @@
 @using = mcapl
 
 target = ail.util.AJPF_w_AIL
-target.args =src/examples/eass/verification/platoon/platoon.ail,src/examples/eass/verification/platoon/platoon.psl,modified_req4-2
+target.args =src/examples/eass/verification/multiagent/platoon/platoon.ail,src/examples/eass/verification/multiagent/platoon/platoon.psl,multiagent_join
 
-log.info = ail.mas.DefaultEnvironment,eass.mas.verification.EASSVerificationEnvironment,eass.platooning.PlatoonVerificationEnvironment,ajpf.product.Product
+log.info = ail.mas.DefaultEnvironment,eass.mas.verification.EASSDefualtEnvironment,eass.multiagent.platooning.PlatoonEnvironment,ajpf.product.Product
 //log.fine = ail.semantics.AILAgent
 
 listener+=,.listener.ExecTracker

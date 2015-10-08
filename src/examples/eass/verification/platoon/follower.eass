@@ -59,10 +59,11 @@ set_spacing(X):- ack_spacing(X);
 +id(2): {True}<- perf(join_ok(1));
 +id_front(X): {B id(3)}<- perf(join_position(X));
 
-+platoon_set_up: {True}<- 
++platoon_set_up(X, Y): {B name(X), B preceding(Y), ~B preceding(none)}<- 
 	+.lock,
 	+!speed_controller(1) [achieve],
 	+!steering_controller(1) [achieve],
+	+platoon_m(X, Y),
 	-.lock;
 
 +wrong_front: {G platoon_m(SENDER, FRONT3) [achieve]}
@@ -80,7 +81,7 @@ set_spacing(X):- ack_spacing(X);
 		~G do_leave [perform], ~G platoon_m(Name, FRONT) [achieve]} <-
                                 // get rid of any beliefs related to prevoius join platoon maneuvers
 		+.lock,
-		-join_agreement(Name, FRONT), -platoon_m, -ready_to_join, -leave_agreement(Name),
+		-join_agreement(Name, FRONT), -platoon_m, -ready_to_join, -leave_agreement(Name), -platoon(Name, none),
 		-.lock,
 		+!platoon_m(Name, FRONT) [achieve], 
 		print(follower_3_drop_goal_or_successfully_joined_in_the_middle);
@@ -153,13 +154,13 @@ set_spacing(X):- ack_spacing(X);
 		-!set_spacing(X) [achieve];
 							
 +!set_spacing(X5) [achieve]: {B platoon_m(K, F), G do_leave[perform], B name(K), ~B leave_agreement(K)} <-
-		-spacing,
+		-spacing, -ack_spacing(X20),
 		perf(set_spacing(X5)), 
 		*spacing,
 		.send(leader, :tell, set_spacing_from(K)), 							
 		+ack_spacing(X5);
 +!set_spacing(X15) [achieve]: {B platoon_m(K, F), ~G do_leave[perform], B name(K)} <- 
-		-spacing,
+		-spacing, -ack_spacing(X21),
 		perf(set_spacing(X15)), 
 		*spacing,
 		.send(leader, :tell, set_spacing_from(K)), 
@@ -201,11 +202,12 @@ set_spacing(X):- ack_spacing(X);
 +!leave_platoon [achieve]: {B name(X), B leave_agreement(X), B changed_lane, B no_platoon_m, B steering_controller(0), B speed_controller(0)} 	<- 
 		+.lock,
 		-platoon_m, -no_platoon_m,
+		-platoon_ok, 
 		+leave_ok,
 		-.lock;
 
 +!clean_up_beliefs_on_leaving [perform]: {True} <-
 		+.lock,
-		-no_platoon_m, -platoon_ok, -ready_to_leave, -platoon_m,
+		-no_platoon_m, -ready_to_leave, -platoon_m,
 		-.lock;
 

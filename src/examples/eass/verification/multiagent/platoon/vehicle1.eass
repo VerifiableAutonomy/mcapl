@@ -1,0 +1,17 @@
+:name: vehicle
+
+:Initial Beliefs:
+
+
+:Reasoning Rules:
+
+leave:- ~join;
+
+:Initial Goals:
+
+:Plans:
+
+/* Default plans for handling messages */
++.received(:tell, B): {True} <- +B;   
+
++perf_set_spacing: {True} <- +.lock, .send(follower1, :tell, spacing), -perf_set_spacing, -.lock;

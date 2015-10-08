@@ -26,3 +26,69 @@
 full_model: [] ~B(follower3, bad)
 
 test: <> B (follower3, join_agreement(follower3, follower1)) || [] ~B(follower3, join_agreement(follower3, follower1))
+
+req1_1: G(follower3, platoon_m(follower3, follower1))
+		&
+		[] (ItD(follower3, send(leader, 1, message(follower3, 1, follower1))) -> <>B(follower3, join_agreement(follower3, follower1)))
+		&
+		~B(follower3, changed_lane)
+		->
+		<>D(follower3, perf(join_ok(1)))  
+
+req1_2: ([]~B (follower3, join_agreement(follower3, follower1)))
+			 -> 
+			[](~D(follower3, perf(join_ok(1))))
+		
+req3_1: []( D(follower3, perf(join_ok(1)))-> <>B(follower3, changed_lane))
+		&
+		B(follower3, join_agreement(follower3, follower1))		
+		-> 
+		<>D(follower3, perf(speed_controller(1)))
+		
+		
+req3_2: []~B(follower3, changed_lane)
+		->
+	  []~D(follower3, speed_controller(1))
+	
+
+req3_3: [] (
+		(G(follower3, platoon_m(follower3, follower1)) & ~B(follower3, join_agreement(follower3, follower1)))
+		->
+		[] ~D(follower3, speed_controller(1))
+		)
+	
+req4_1: []( D(follower3, perf(join_ok(1)))-> <>B(follower3, changed_lane) )
+		&
+		B(follower3, join_agreement(follower3, follower1))
+		& 
+		[]( D(follower3, perf(speed_controller(1)))-> <>B(follower3, initial_distance) )
+		->
+		<> D(follower3, perf(steering_controller(1)))
+		
+req4_2: [] (
+		(G(follower3, platoon_m(follower3, follower1)) & ~B(follower3, initial_distance))
+		->
+		[] ~D(follower3, perf(steering_controller(1)))
+		)
+
+modified_req4-2: [] (
+		(
+		 G(follower3, platoon_m(follower3, follower1)) &
+		 B(follower3, join_agreement(follower3, follower1)) &
+		 B(follower3, changed_lane) &
+		 D(follower3, perf(speed_controller(1))) &
+		 ~B(follower3, initial_distance)
+		 )
+		->
+		[] ~D(follower3, perf(steering_controller(1)))
+		)
+
+req7_1: [] (
+		( G(follower3, platoon_m(follower3, follower1)) &
+		B(follower3, join_agreement(follower3, follower1)) &
+		D(follower3, perf(speed_controller(1))) &
+		D(follower3, perf(steering_controller(1))) 
+		)
+		->
+		<> B(follower3, platoon_ok)
+		)

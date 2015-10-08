@@ -1,0 +1,88 @@
+
+
+joining_success: []( G(leader, platoon_m(follower3, follower1))
+		&
+		[] (ItD(leader, send(follower1, 3, set_spacing(17))) -> <>B(leader, set_spacing_from(follower1)))
+		&
+		[] (ItD(leader, send(follower3, 1, join_agreement(follower3, follower1))) -> <>B(leader, message(follower3, 2)))
+		->
+		<>B(leader, platoon_m(follower3, follower1))  
+		)
+	
+??
+	
+started 23/09/15 11:30:54
+
+------------------------------------------------------------------
+
+leaving_success: : [] (
+		(G(leader, platoon_m(leader, follower1)) 
+			&
+		 [] (ItD(leader, send(follower3, 3, set_spacing(17))) -> <>B(leader, set_spacing_from(follower3)))
+		 	&
+		 [] (ItD(leader, send(follower3, 1, leave_agreement(follower3))) -> <>B(leader, message(follower3, 2)))	
+		)
+		->
+		<>B(leader, platoon_m(leader, follower1))		
+	  )
+	  
+
+====================================================== results
+no errors detected
+
+====================================================== statistics
+elapsed time:       02:52:51
+states:             new=495,visited=5171,backtracked=5666,end=144
+search:             maxDepth=31,constraints=0
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=490
+heap:               new=277835276,released=278096889,maxLive=7301,gcCycles=5666
+instructions:       95027499861
+max memory:         3611MB
+loaded code:        classes=353,methods=5379
+
+====================================================== search finished: 22/09/15 19:39
+
+	  
+started 22/09/15 16:47:00
+
+------------------------------------------------------------------
+
+
+joining_agr_liveness: []( G(leader, platoon_m(follower3, follower1))
+		&
+		[] (ItD(leader, send(follower1, 3, set_spacing(17))) -> <>B(leader, set_spacing_from(follower1)))
+		->
+		<>ItD(leader, send(follower3, 1, join_agreement(follower3, follower1)))
+		)
+
+??
+
+started 23/09/15 11:13:34
+
+------------------------------------------------------------------
+
+joining_agr_safety: [](~B(leader, spacing_17(follower1)))
+				->
+				[] (~ItD(leader, send(follower3, 1, join_agreement(follower3, follower1))))
+
+
+====================================================== results
+no errors detected
+
+====================================================== statistics
+elapsed time:       00:06:24
+states:             new=40,visited=176,backtracked=216,end=22
+search:             maxDepth=6,constraints=0
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=35
+heap:               new=7655600,released=7634551,maxLive=6725,gcCycles=216
+instructions:       3182559189
+max memory:         2464MB
+loaded code:        classes=351,methods=5363
+
+====================================================== search finished: 23/09/15 11:28
+
+
+started 23/09/15 11:21:47
+
+------------------------------------------------------------------
+			

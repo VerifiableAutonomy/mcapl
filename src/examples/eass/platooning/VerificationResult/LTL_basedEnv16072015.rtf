@@ -1,0 +1,194 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1348\cocoasubrtf170
+{\fonttbl\f0\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww18780\viewh11020\viewkind0
+\deftab720
+\pard\pardeftab720
+
+\f0\fs22 \cf0 \
+LTL_based environment:\
+\
+\
+\
+\
+req7_7_3:	( 		\
+		[](B(follower3, spacing(17))-> <>D(follower3, \ul perf\ulnone (set_spacing(17))))			\
+		&\
+		[](D(follower3, \ul perf\ulnone (set_spacing(17)))-> <>B(follower3, spacing))\
+		->\
+		<>ItD(follower3, send(leader, 1, set_spacing_from(follower3)))\
+	  )\
+\
+\
+\
+[INFO] No assert_spacing\
+		 # garbage collection\
+[INFO] Adding 28 to [0, 1, 69, 17951, 17959, 17960, 17962]\
+----------------------------------- [8] forward: 28 visited\
+----------------------------------- [7] backtrack: 17962\
+		 # choice: gov.nasa.jpf.vm.BooleanChoiceGenerator[[id="verifyGetBoolean",isCascaded:false,\{false,>true\}]\
+[INFO] assert_spacing_x\
+[INFO] assert_spacing\
+		 # garbage collection\
+[INFO] Adding 29 to [0, 1, 69, 17951, 17959, 17960, 17962]\
+----------------------------------- [8] forward: 29 visited\
+----------------------------------- [7] backtrack: 17962\
+----------------------------------- [7] done: 17962\
+----------------------------------- [6] backtrack: 17960\
+----------------------------------- [6] done: 17960\
+----------------------------------- [5] backtrack: 17959\
+		 # choice: gov.nasa.jpf.vm.BooleanChoiceGenerator[[id="verifyGetBoolean",isCascaded:false,\{false,>true\}]\
+[INFO] assert_initial_distance\
+		 # garbage collection\
+[INFO] Adding 17963 to [0, 1, 69, 17951, 17959]\
+----------------------------------- [6] forward: 17963 new\
+		 # choice: gov.nasa.jpf.vm.BooleanChoiceGenerator[[id="verifyGetBoolean",isCascaded:false,\{>false,true\}]\
+		 # garbage collection\
+[INFO] Adding 17964 to [0, 1, 69, 17951, 17959, 17963]\
+----------------------------------- [7] forward: 17964 new\
+		 # choice: gov.nasa.jpf.vm.BooleanChoiceGenerator[[id="verifyGetBoolean",isCascaded:false,\{>false,true\}]\
+[INFO] Not assert_spacing_x\
+[INFO] No assert_spacing\
+		 # garbage collection\
+[INFO] Adding 32 to [0, 1, 69, 17951, 17959, 17963, 17964]\
+----------------------------------- [8] forward: 32 visited\
+----------------------------------- [7] backtrack: 17964\
+		 # choice: gov.nasa.jpf.vm.BooleanChoiceGenerator[[id="verifyGetBoolean",isCascaded:false,\{false,>true\}]\
+[INFO] Not assert_spacing_x\
+[INFO] assert_spacing\
+		 # garbage collection\
+[INFO] Adding 33 to [0, 1, 69, 17951, 17959, 17963, 17964]\
+----------------------------------- [8] forward: 33 visited\
+----------------------------------- [7] backtrack: 17964\
+----------------------------------- [7] done: 17964\
+----------------------------------- [6] backtrack: 17963\
+		 # choice: gov.nasa.jpf.vm.BooleanChoiceGenerator[[id="verifyGetBoolean",isCascaded:false,\{false,>true\}]\
+		 # garbage collection\
+[INFO] Adding 17965 to [0, 1, 69, 17951, 17959, 17963]\
+----------------------------------- [7] forward: 17965 new\
+		 # choice: gov.nasa.jpf.vm.BooleanChoiceGenerator[[id="verifyGetBoolean",isCascaded:false,\{>false,true\}]\
+[INFO] assert_spacing_x\
+[INFO] No assert_spacing\
+		 # garbage collection\
+[INFO] Adding 35 to [0, 1, 69, 17951, 17959, 17963, 17965]\
+----------------------------------- [8] forward: 35 visited\
+----------------------------------- [7] backtrack: 17965\
+		 # choice: gov.nasa.jpf.vm.BooleanChoiceGenerator[[id="verifyGetBoolean",isCascaded:false,\{false,>true\}]\
+[INFO] assert_spacing_x\
+[INFO] assert_spacing\
+		 # garbage collection\
+[INFO] Adding 36 to [0, 1, 69, 17951, 17959, 17963, 17965]\
+----------------------------------- [8] forward: 36 visited\
+----------------------------------- [7] backtrack: 17965\
+----------------------------------- [7] done: 17965\
+----------------------------------- [6] backtrack: 17963\
+----------------------------------- [6] done: 17963\
+----------------------------------- [5] backtrack: 17959\
+----------------------------------- [5] done: 17959\
+----------------------------------- [4] backtrack: 17951\
+----------------------------------- [4] done: 17951\
+----------------------------------- [3] backtrack: 69\
+----------------------------------- [3] done: 69\
+----------------------------------- [2] backtrack: 1\
+----------------------------------- [2] done: 1\
+----------------------------------- [1] backtrack: 0\
+----------------------------------- [1] done: 0\
+----------------------------------- [0] backtrack: -1\
+----------------------------------- [0] done: -1\
+----------------------------------- search finished\
+\
+====================================================== results\
+no errors detected\
+\
+====================================================== statistics\
+elapsed time:       02:27:20\
+states:             new=17966,visited=17652,backtracked=35618,end=302\
+search:             maxDepth=40,constraints=0\
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=17960\
+heap:               new=266144764,released=265384225,maxLive=7470,gcCycles=35618\
+instructions:       86538557055\
+max memory:         564MB\
+loaded code:        classes=353,methods=5360\
+\
+====================================================== search finished: 16/07/15 18:44\
+\
+\
+\pard\pardeftab720
+\cf0 \
+////////////////////////////////////////////////////////////////////////////////////////////////////////\
+\
+\pard\pardeftab720
+\cf0 test: []( G(follower3, leave_platoon)\
+		  &\
+		  []( ItD(follower3, send(leader, 1, message(follower3, 0))) -> B(follower3, leave_agreement(follower3)) )\
+		  &\
+		  B(follower3, speed_controller(1))		\
+		  ->\
+		  <>D(follower3, \ul perf\ulnone (speed_controller(0)))\
+	)\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+		 # garbage collection\
+[INFO] Adding 32 to [0, 1, 68, 17950, 17958, 17962, 17963]\
+----------------------------------- [8] forward: 32 visited\
+----------------------------------- [7] backtrack: 17963\
+----------------------------------- [7] done: 17963\
+----------------------------------- [6] backtrack: 17962\
+		 # choice: gov.nasa.jpf.vm.BooleanChoiceGenerator[[id="verifyGetBoolean",isCascaded:false,\{false,>true\}]\
+		 # garbage collection\
+[INFO] Adding 17964 to [0, 1, 68, 17950, 17958, 17962]\
+----------------------------------- [7] forward: 17964 new\
+		 # choice: gov.nasa.jpf.vm.BooleanChoiceGenerator[[id="verifyGetBoolean",isCascaded:false,\{>false,true\}]\
+[INFO] assert_spacing_x\
+[INFO] No assert_spacing\
+		 # garbage collection\
+[INFO] Adding 34 to [0, 1, 68, 17950, 17958, 17962, 17964]\
+----------------------------------- [8] forward: 34 visited\
+----------------------------------- [7] backtrack: 17964\
+		 # choice: gov.nasa.jpf.vm.BooleanChoiceGenerator[[id="verifyGetBoolean",isCascaded:false,\{false,>true\}]\
+[INFO] assert_spacing_x\
+[INFO] assert_spacing\
+		 # garbage collection\
+[INFO] Adding 35 to [0, 1, 68, 17950, 17958, 17962, 17964]\
+----------------------------------- [8] forward: 35 visited\
+----------------------------------- [7] backtrack: 17964\
+----------------------------------- [7] done: 17964\
+----------------------------------- [6] backtrack: 17962\
+----------------------------------- [6] done: 17962\
+----------------------------------- [5] backtrack: 17958\
+----------------------------------- [5] done: 17958\
+----------------------------------- [4] backtrack: 17950\
+----------------------------------- [4] done: 17950\
+----------------------------------- [3] backtrack: 68\
+----------------------------------- [3] done: 68\
+----------------------------------- [2] backtrack: 1\
+----------------------------------- [2] done: 1\
+----------------------------------- [1] backtrack: 0\
+----------------------------------- [1] done: 0\
+----------------------------------- [0] backtrack: -1\
+----------------------------------- [0] done: -1\
+----------------------------------- search finished\
+\
+====================================================== results\
+no errors detected\
+\
+====================================================== statistics\
+elapsed time:       02:30:43\
+states:             new=17965,visited=17653,backtracked=35618,end=302\
+search:             maxDepth=40,constraints=0\
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=17960\
+heap:               new=278058259,released=277297858,maxLive=7497,gcCycles=35618\
+instructions:       87664485724\
+max memory:         651MB\
+loaded code:        classes=355,methods=5376\
+\
+====================================================== search finished: 17/07/15 12:28\
+}
