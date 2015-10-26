@@ -1,0 +1,260 @@
+
+req1_1: G(follower3, platoon_m(follower3, follower1))
+		&
+		[] (ItD(follower3, send(leader, 1, message(follower3, 1, follower1))) -> <>B(follower3, join_agreement(follower3, follower1)))
+		&
+		~B(follower3, changed_lane)
+		->
+		<>D(follower3, perf(join_ok(1)))  
+
+
+====================================================== results
+no errors detected
+
+====================================================== statistics
+elapsed time:       ;5:44:29
+states:             new=52849,visited=396325,backtracked=449174,end=396
+search:             maxDepth=168,constraints=0
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=52842
+heap:               new=18044691621,released=18051678023,maxLive=8003,gcCycles=449174
+instructions:       2978685832015
+max memory:         4385MB
+loaded code:        classes=350,methods=5360
+
+====================================================== search finished: 06/09/15 06:25
+
+started 01/09/15 10:40:32
+
+
+---------------------------------------------------
+
+
+req1_2: ([]~B (follower3, join_agreement(follower3, follower1)))
+			 -> 
+			[](~D(follower3, perf(join_ok(1))))
+
+
+====================================================== results
+no errors detected
+
+====================================================== statistics
+elapsed time:       :0:31:37
+states:             new=52849,visited=396325,backtracked=449174,end=396
+search:             maxDepth=168,constraints=0
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=52842
+heap:               new=18044691580,released=18051677985,maxLive=8000,gcCycles=449174
+instructions:       2978685829066
+max memory:         4371MB
+loaded code:        classes=349,methods=5268
+
+====================================================== search finished: 30/08/15 16:54
+
+started 26/08/15 12:22:51
+
+
+-------------------------------------------------
+
+
+req3_1: []( D(follower3, perf(join_ok(1)))-> <>B(follower3, changed_lane))
+		&
+		B(follower3, join_agreement(follower3, follower1))		
+		-> 
+		<>D(follower3, perf(speed_controller(1)))
+	
+
+====================================================== results
+no errors detected
+
+====================================================== statistics
+elapsed time:       38:24:08
+states:             new=19119,visited=135607,backtracked=154726,end=140
+search:             maxDepth=19,constraints=0
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=19112
+heap:               new=6701521238,released=6695981815,maxLive=7868,gcCycles=154726
+instructions:       1186997105494
+max memory:         986MB
+loaded code:        classes=346,methods=5328
+
+====================================================== search finished: 03/09/15 01:08
+
+started 01/09/15 10:44:30	
+
+
+-------------------------------------------------
+
+req3_2: []~B(follower3, changed_lane)
+		->
+	  []~D(follower3, speed_controller(1))
+
+
+
+====================================================== results
+no errors detected
+
+====================================================== statistics
+elapsed time:       15:34:18
+states:             new=8751,visited=62003,backtracked=70754,end=72
+search:             maxDepth=17,constraints=0
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=8746
+heap:               new=2595379295,released=2591989145,maxLive=7741,gcCycles=70754
+instructions:       486787984727
+max memory:         823MB
+loaded code:        classes=346,methods=5328
+
+====================================================== search finished: 04/09/15 05:12
+
+started 03/09/15 13:38:22
+
+----------------------------------------------------	
+
+
+req3_3: [] (
+		(G(follower3, platoon_m(follower3, follower1)) & ~B(follower3, join_agreement(follower3, follower1)))
+		->
+		[] ~D(follower3, speed_controller(1))
+		)
+
+
+====================================================== results
+no errors detected
+
+====================================================== statistics
+elapsed time:       >2:26:36
+states:             new=55239,visited=414399,backtracked=469638,end=412
+search:             maxDepth=394,constraints=0
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=55234
+heap:               new=18051349769,released=18058652948,maxLive=7936,gcCycles=469638
+instructions:       3051117719680
+max memory:         6134MB
+loaded code:        classes=348,methods=5344
+
+====================================================== search finished: 10/09/15 07:41
+						
+started 04/09/15 09:14:33
+
+----------------------------------------------------	
+		
+
+req4_1: []( D(follower3, perf(join_ok(1)))-> <>B(follower3, changed_lane) )
+		&
+		B(follower3, join_agreement(follower3, follower1))
+		& 
+		[]( D(follower3, perf(speed_controller(1)))-> <>B(follower3, initial_distance) )
+		->
+		<> D(follower3, perf(steering_controller(1)))
+
+
+====================================================== results
+no errors detected
+
+====================================================== statistics
+elapsed time:       81:36:23
+states:             new=28043,visited=201451,backtracked=229494,end=172
+search:             maxDepth=229,constraints=0
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=28036
+heap:               new=10432929139,released=10428133023,maxLive=7957,gcCycles=229494
+instructions:       1795200625912
+max memory:         4351MB
+loaded code:        classes=346,methods=5328
+
+====================================================== search finished: 10/09/15 19:27
+
+started 07/09/15 09:50:59
+
+----------------------------------------------------	
+	
+req4_2: [] (
+		(G(follower3, platoon_m(follower3, follower1)) & ~B(follower3, initial_distance))
+		->
+		[] ~D(follower3, perf(steering_controller(1))
+		)
+
+
+[INFO] Adding 46 to [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 15, 16, 24, 25, 26, 27, 40, 41, 42, 43, 45]
+----------------------------------- [24] forward: 46 visited
+----------------------------------- [23] backtrack: 45
+----------------------------------- [23] done: 45
+----------------------------------- [22] backtrack: 43
+		 # choice: gov.nasa.jpf.vm.choice.IntIntervalGenerator[id="verifyGetInt(II)",isCascaded:false,0..23,delta=+1,cur=2]
+[INFO] No assert ready_to_leave or ready_to_join
+[INFO] No assert_changed_lane
+[INFO] No assert_initial_distance
+[INFO] No assert_spacing
+		 # garbage collection
+[INFO] Adding 12776 to [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 15, 16, 24, 25, 26, 27, 40, 41, 42, 43]
+----------------------------------- [23] forward: 12776 new
+		 # choice: gov.nasa.jpf.vm.choice.IntIntervalGenerator[id="verifyGetInt(II)",isCascaded:false,0..8,delta=+1,cur=0]
+[INFO] assert_join_agreement
+[INFO] assert_platoon_m
+[INFO] follower3 done perf(join_ok(1))
+		 # garbage collection
+[INFO] Adding 71 to [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 15, 16, 24, 25, 26, 27, 40, 41, 42, 43, 12776]
+[<0, 2, 0>, <1, 2, 1>, <2, 6, 1>, <3, 8, 1>, <4, 8, 0>, <5, 8, 0>, <6, 8, 0>, <7, 8, 0>, <8, 8, 0>, <9, 8, 0>, <13, 8, 0>, <14, 8, 0>, <15, 8, 0>, <16, 8, 0>, <24, 8, 0>, <25, 8, 0>, <26, 8, 0>, <27, 8, 0>, <40, 8, 0>, <41, 8, 0>, <42, 8, 0>, <43, 8, 0>, <45, 8, 0>, <46, 8, 0>, <51, 8, 0>, <52, 8, 0>, <54, 8, 0>, <55, 8, 0>, <63, 8, 0>, <64, 8, 0>, <66, 8, 0>, <67, 8, 0>, <70, 8, 0>, <71, 8, 0>, <77, 8, 0>, <78, 8, 0>, <81, 8, 0>, <82, 8, 0>, <91, 8, 0>, <92, 8, 0>, <95, 8, 0>, <96, 8, 0>, <100, 8, 0>, <101, 8, 0>, <105, 8, 0>, <106, 8, 0>, <116, 8, 0>, <117, 8, 0>, <118, 8, 0>, <119, 11, 0>, <120, 12, 1>, <121, 12, 0>, <122, 12, 1>, <43, 12, 0>, <12776, 12, 1>, <71, 12, 0>, <12671, 12, 1>, <1032, 12, 0>, <1032, 12, 1>]
+----------------------------------- [24] forward: 71 visited
+
+====================================================== error 1
+ajpf.MCAPLListener
+An Accepting Path has been found: 
+[MS: 0, BS: 2, UN: 0], [MS: 1, BS: 2, UN: 1], [MS: 2, BS: 6, UN: 1], [MS: 3, BS: 8, UN: 1], [MS: 4, BS: 8, UN: 0],
+[MS: 5, BS: 8, UN: 0], [MS: 6, BS: 8, UN: 0], [MS: 7, BS: 8, UN: 0], [MS: 8, BS: 8, UN: 0], [MS: 9, BS: 8, UN: 0],
+[MS: 13, BS: 8, UN: 0], [MS: 14, BS: 8, UN: 0], [MS: 15, BS: 8, UN: 0], [MS: 16, BS: 8, UN: 0], [MS: 24, BS: 8, UN: 0],
+[MS: 25, BS: 8, UN: 0], [MS: 26, BS: 8, UN: 0], [MS: 27, BS: 8, UN: 0], [MS: 40, BS: 8, UN: 0], [MS: 41, BS: 8, UN: 0],
+[MS: 42, BS: 8, UN: 0], [MS: 43, BS: 8, UN: 0], [MS: 45, BS: 8, UN: 0], [MS: 46, BS: 8, UN: 0], [MS: 51, BS: 8, UN: 0],
+[MS: 52, BS: 8, UN: 0], [MS: 54, BS: 8, UN: 0], [MS: 55, BS: 8, UN: 0], [MS: 63, BS: 8, UN: 0], [MS: 64, BS: 8, UN: 0],
+[MS: 66, BS: 8, UN: 0], [MS: 67, BS: 8, UN: 0], [MS: 70, BS: 8, UN: 0], [MS: 71, BS: 8, UN: 0], [MS: 77, BS: 8, UN: 0],
+[MS: 78, BS: 8, UN: 0], [MS: 81, BS: 8, UN: 0], [MS: 82, BS: 8, UN: 0], [MS: 91, BS: 8, UN: 0], [MS: 92, BS: 8, UN: 0],
+[MS: 95, BS: 8, UN: 0], [MS: 96, BS: 8, UN: 0], [MS: 100, BS: 8, UN: 0], [MS: 101, BS: 8, UN: 0], [MS: 105, BS: 8, UN: 0],
+[MS: 106, BS: 8, UN: 0], [MS: 116, BS: 8, UN: 0], [MS: 117, BS: 8, UN: 0], [MS: 118, BS: 8, UN: 0], [MS: 119, BS: 11, UN: 0],
+[MS: 120, BS: 12, UN: 1], [MS: 121, BS: 12, UN: 0], [MS: 122, BS: 12, UN: 1], [MS: 43, BS: 12, UN: 0], [MS: 12776, BS: 12, UN: 1],
+[MS: 71, BS: 12, UN: 0], [MS: 12671, BS: 12, UN: 1], [MS: 1032, BS: 12, UN: 0], [MS: 1032, BS: 12, UN: 1], 
+
+====================================================== snapshot #1
+thread java.lang.Thread:{id:0,name:main,status:RUNNING,priority:5,isDaemon:false,lockCount:0,suspendCount:0}
+  call stack:
+	at java.util.Random.nextInt(Random.java)
+	at eass.verification.platoon.PlatoonVerificationEnvironment.generate_sharedbeliefs(PlatoonVerificationEnvironment.java:105)
+	at eass.mas.verification.EASSVerificationEnvironment.done(EASSVerificationEnvironment.java:165)
+	at ail.mas.MAS.alldone(MAS.java:191)
+	at ajpf.MCAPLcontroller.checkEnd(MCAPLcontroller.java:282)
+	at ajpf.MCAPLcontroller.begin(MCAPLcontroller.java:180)
+	at ail.util.AJPF_w_AIL.run(AJPF_w_AIL.java:73)
+	at ail.util.AJPF_w_AIL.main(AJPF_w_AIL.java:56)
+
+----------------------------------- search finished
+
+====================================================== results
+error #1: ajpf.MCAPLListener "An Accepting Path has been found:  [MS: 0, BS: 2, ..."
+
+====================================================== statistics
+elapsed time:       35:18:40
+states:             new=12777,visited=108252,backtracked=121005,end=165
+search:             maxDepth=285,constraints=0
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=12775
+heap:               new=4172725409,released=4176453170,maxLive=7853,gcCycles=121029
+instructions:       532369824052
+max memory:         4858MB
+loaded code:        classes=348,methods=5344
+
+====================================================== search finished: 15/09/15 21:26
+
+started 14/09/15 10:08:00
+
+-----------------------------------------------------	
+
+req7_1: [] (
+		( G(follower3, platoon_m(follower3, follower1)) &
+		B(follower3, join_agreement(follower3, follower1)) &
+		D(follower3, perf(speed_controller(1))) &
+		D(follower3, perf(steering_controller(1))) 
+		)
+		->
+		<> B(follower3, platoon_ok)
+		)
+
+????
+
+started 14/09/15 10:22:44
+
+-----------------------------------------------------	
+	
+		

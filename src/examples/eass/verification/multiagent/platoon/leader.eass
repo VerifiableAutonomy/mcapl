@@ -1,0 +1,23 @@
+
+:name: leader
+
+:Initial Beliefs:
+
+:Reasoning Rules:
+
+:Initial Goals:
+
+:Plans:
+
+/* Default plans for handling messages */
++.received(:tell, B): {True} <- +B;   
+
++message(SENDER, 1, FRONT): {True} <- +.lock, -message(SENDER, 1, FRONT), .send(SENDER, :tell, join_agreement(SENDER, FRONT)), -.lock;
+		 								 						
++message(SENDER, 2): {~B leave} <- +.lock, .send(SENDER,:tell, platoon_m), -message(SENDER, 2), -.lock;
+
++message(SENDER, 0)	: {True} <- +.lock, .send(SENDER, :achieve, set_spacing(17)), +leave, -.lock, *set_spacing_from(SENDER);
+
++set_spacing_from(SENDER): {B leave} <- +.lock, .send(SENDER, :tell, leave_agreement(SENDER)), -set_spacing_from(SENDER), -.lock, *message(SENDER, 2);	
+
++message(SENDER, 2): {B leave} <- +.lock, .send(SENDER,:tell, no_platoon_m), -message(SENDER, 2), -message(SENDER, 0), -leave, -.lock; 						
