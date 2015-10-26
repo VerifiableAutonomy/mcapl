@@ -94,9 +94,8 @@ set_spacing(X):- ack_spacing(X);
 +! do_join[perform]: {True} <- -ready_to_join;
 
 +vehicle_failed: {G platoon_m(SENDER, FRONT) [achieve], ~B changed_lane, B join_agreement(SENDER, FRONT)} <-
-		+! clean_up_beliefs_on_joining [perform],
 		+! speed_controller(0) [achieve],
-		+! steering_controller(0) [achieve], -platoon_m,
+		+! steering_controller(0) [achieve], +leave_ok, -vehicle_failed,
 		-!platoon_m(SENDER, FRONT) [achieve];		
 
 +!platoon_m(SENDER, FRONT) [achieve]: {~B join_agreement(SENDER, FRONT)} <- 
@@ -185,7 +184,7 @@ set_spacing(X):- ack_spacing(X);
 +ready_to_leave: {True} <- -ready_to_leave;
 
 +vehicle_failed: {G leave_platoon [achieve], ~B changed_lane, B name(X), B leave_agreement(X)} <- 
-		+!clean_up_beliefs_on_leaving [perform], -vehicle_failed,
+		-vehicle_failed,
 		+!speed_controller(0) [achieve], -no_platoon_m, 
 		+!steering_controller(0) [achieve], -no_platoon_m, 
 		perf(join_ok(0)), .send(vehicle3, :tell, perf_join_ok), -no_platoon_m, 

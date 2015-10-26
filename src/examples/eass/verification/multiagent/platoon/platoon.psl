@@ -35,6 +35,13 @@ agr: [] G(follower3, platoon_m(follower3, follower1)) &
 		<>B(follower3, join_agreement(follower3, follower1))
 	)
 
+check_joining_path: G(follower3, platoon_m(follower3, follower1)) & 
+					( [] D(follower3, perf(join_ok(1))) -> <> B(follower3, changed_lane) ) &
+					( [] D(follower3, perf(speed_controller(1))) -> <> B(follower3, initial_distance) )
+					->
+					<> B(follower3, platoon_m)
+
+	
 check_failure: G(follower3, platoon_m(follower3, follower1)) & 
 		( [] D(follower3, perf(join_ok(1))) -> <> B(follower3, changed_lane) )
 		->
@@ -56,18 +63,36 @@ set_space_verified_in6h:19:54: [] G(follower3, leave_platoon) &
 go_check_verified: [] ( G(follower3, leave_platoon)
 				-> ~G(follower3, platoon_m(follower3, follower1))  )
 
-communication_check: []( G(follower3, platoon_m(follower3, follower1)) &
-					~B(follower3, join_agreement(follower3, follower1))
+communication_check: []( ItD(follower3, send(leader, 1, message(follower3, 1, follower1)))
 					->
 					<>ItD(leader, send(follower3, 1, join_agreement(follower3, follower1))) 
 					)
 
-leave_com_for_agr: []( G(follower3, leave_platoon) & 
-					~B(follower3, leave_agreement(follower3))	
+com_leaving: []( ( ItD(follower3, send(leader, 1, message(follower3, 0))) &
+				~B(follower3, leave_agreement(follower3))
+				)
+			->
+			<>G(follower3, set_spacing(17))
+			)					
+					
+leave_com_for_agr:  []( (G(follower3, leave_platoon) & 
+						~B(follower3, leave_agreement(follower3))  
+					)
 					->
-					<>ItD(follower3, send(leader, 1, set_spacing_from(follower3)))
+					<>B(follower3, ack_spacing(17))
 					)
 
+req1_1: G(follower3, platoon_m(follower3, follower1))
+		&
+		[] (ItD(follower3, send(leader, 1, message(follower3, 1, follower1))) -> <>B(follower3, join_agreement(follower3, follower1)))
+		&
+		~B(follower3, changed_lane)
+		->
+		<>D(follower3, perf(join_ok(1)))  
+
+					
+					
+					
 multiagent_join: [] (G(follower3, platoon_m(follower3, follower1)) & ~B(follower3, join_agreement(follower3, follower1))
 				->
 				 <> G(follower1, set_spacing(17))

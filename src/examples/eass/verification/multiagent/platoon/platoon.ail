@@ -38,6 +38,7 @@ mas.agent.3.builder= eass.EASSAgentBuilder
 mas.agent.3.name= vehicle3
 
 ajpf.record = true
+ajpf.replay.file = /records/platoon.txt
 ajpf.transition_every_reasoning_cycle = false
 ail.store_sent_messages = false
 

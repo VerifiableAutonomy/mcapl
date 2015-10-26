@@ -78,5 +78,87 @@ started 29/09/15 09:33:07
 -------------------------------
 
 
+req1_1: G(follower3, platoon_m(follower3, follower1))
+		&
+		[] (ItD(follower3, send(leader, 1, message(follower3, 1, follower1))) -> <>B(follower3, join_agreement(follower3, follower1)))
+		&
+		~B(follower3, changed_lane)
+		->
+		<>D(follower3, perf(join_ok(1)))  
+
+
+====================================================== results
+no errors detected
+
+====================================================== statistics
+elapsed time:       16:24:48
+states:             new=99857,visited=204181,backtracked=304038,end=0
+search:             maxDepth=85,constraints=0
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=99857
+heap:               new=2120447760,released=2125812480,maxLive=9889,gcCycles=304038
+instructions:       274012758149
+max memory:         3752MB
+loaded code:        classes=354,methods=5403
+
+====================================================== search finished: 10/10/15 04:38
+
+started 09/10/15 12:13:34
+
+-------------------------------
+
+leave_com_for_agr:  ( G(follower3, leave_platoon) & 
+					~B(follower3, leave_agreement(follower3)) & 
+					~G(follower3, set_spacing(17))
+					)
+					->
+					<>ItD(leader, send(follower3, 3, set_spacing(17)))
+
+
+====================================================== results
+no errors detected
+
+====================================================== statistics
+elapsed time:       15:57:18
+states:             new=99380,visited=203167,backtracked=302547,end=0
+search:             maxDepth=85,constraints=0
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=99380
+heap:               new=1985094182,released=1990458287,maxLive=9834,gcCycles=302547
+instructions:       257223246503
+max memory:         3778MB
+loaded code:        classes=352,methods=5387
+
+====================================================== search finished: 10/10/15 04:23
+
+started 09/10/15 12:26:02
+
+-------------------------------
+
+check_joining_path: G(follower3, platoon_m(follower3, follower1)) & 
+					( [] D(follower3, perf(join_ok(1))) -> <> B(follower3, changed_lane) ) &
+					( [] D(follower3, perf(speed_controller(1))) -> <> B(follower3, initial_distance) )
+					->
+					<> B(follower3, platoon_m)
+
+====================================================== results
+no errors detected
+
+====================================================== statistics
+elapsed time:       09:18:27
+states:             new=95696,visited=196800,backtracked=292496,end=0
+search:             maxDepth=84,constraints=0
+choice generators:  thread=1 (signal=0,lock=1,sharedRef=0,threadApi=0,reschedule=0), data=95696
+heap:               new=2021706209,released=2026815155,maxLive=9866,gcCycles=292496
+instructions:       243465674793
+max memory:         3808MB
+loaded code:        classes=352,methods=5387
+
+====================================================== search finished: 16/10/15 01:56
+
+started 15/10/15 16:38:18
+
+-------------------------------
+
+
+
 						
 						
