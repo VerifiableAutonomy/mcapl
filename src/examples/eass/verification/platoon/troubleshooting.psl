@@ -83,7 +83,7 @@ req4_1: 	[]( D(follower3, perf(join_ok(1)))-> <>B(follower3, changed_lane) )
 req4_2: [] (
 		(G(follower3, platoon_m(follower3, follower1)) & ~B(follower3, initial_distance))
 		->
-		[] ~D(follower3, perf(steering_controller(1))
+		[] ~D(follower3, steering_controller(1))
 		)
 
 
@@ -112,7 +112,7 @@ verified_provingTrueStatement:   [](
 // ================ At the end of joining procedure, a joining vehicle is in a correct lane with automatic control =====================
 // ====================================== and already sent an acknowledgement to the leader ============================================
 // ========================================================= joining acknowledgement ===================================================
-req7_1: []( D(follower3, perf(join_ok(1)))-> <>B(follower3, changed_lane) )
+req7_1:   []( D(follower3, perf(join_ok(1)))-> <>B(follower3, changed_lane) )
 		&
 		B(follower3, join_agreement(follower3, follower1))
 		& 
@@ -182,7 +182,8 @@ out_of_memory: 			[]( G(follower3, leave_platoon)
 						
 full_model: [] ~B(follower3, bad)
 
-test: ( 		
+test: ( G(follower3, set_spacing(17))
+		&		
 		[](B(follower3, spacing(17))-> <>D(follower3, perf(set_spacing(17))))			
 		&
 		[](D(follower3, perf(set_spacing(17)))-> <>B(follower3, spacing))
