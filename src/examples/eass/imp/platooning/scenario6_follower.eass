@@ -21,12 +21,17 @@ set_spacing(X):- ack_spacing(X);
 
 :Initial Goals:
 
+check_conn [perform]
 
 :Plans:
+
++!check_conn [perform]: {True} <- .send(leader, :tell, hi);
+
 	/* Default plans for handling messages */
 	+.received(:tell, B): {True} <- +B;   
 	+.received(:perform, G): {True} <- +!G [perform];
 	+.received(:achieve, G): {True} <- +!G [achieve];
+
 
 +id(X): {X== 1}<- perf(join_ok(1));
 

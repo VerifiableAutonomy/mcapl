@@ -29,7 +29,13 @@ platoon_full(X):- max_length(X), max_length(4),
 
 :Initial Goals:
 
+check_message_sending [perform]
+
 :Plans:
+
++!check_message_sending [perform]: {True}<- .send(follower1, :tell, wrong_front);
+
+
 
 /* Default plans for handling messages */
 +.received(:tell, B): {True} <- +B;   

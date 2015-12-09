@@ -100,6 +100,21 @@ public class AILSocket {
 			write ("error");
 		}
 	}
+	
+	public void writeUTF(String s) {
+		if (!socket.isClosed() && socket.isConnected()) {
+			try {
+				output.writeUTF(s);
+				// output.write(s.getBytes());
+				// output.write(linefeed.getBytes());
+				output.flush();
+			} catch (Exception e) {
+				AJPFLogger.warning(logname, e.getMessage());
+			}
+		} else {
+			write ("error");
+		}		
+	}
 		
 	/**
 	 * Write an integer to the socket.

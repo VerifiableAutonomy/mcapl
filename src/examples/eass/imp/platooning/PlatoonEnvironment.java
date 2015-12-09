@@ -3,13 +3,15 @@ package eass.imp.platooning;
 import java.util.ArrayList;
 
 import ail.mas.scheduling.NActionScheduler;
-import eass.platooning.util.Leader;
-import eass.platooning.util.Vehicle;
+import eass.imp.platooning.util.Leader;
+import eass.imp.platooning.util.Vehicle;
 import ail.syntax.Action;
 import ail.syntax.Literal;
+import ail.syntax.Message;
 import ail.syntax.NumberTerm;
 import ail.syntax.NumberTermImpl;
 import ail.syntax.Predicate;
+import ail.syntax.SendAction;
 import ail.syntax.StringTermImpl;
 import ail.syntax.Term;
 import ail.syntax.Unifier;
@@ -27,11 +29,9 @@ public class PlatoonEnvironment extends DefaultEASSEnvironment{
 
 	int initial= 0;
 	ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
-	
 	Vehicle v1 = new Vehicle(1);
 	Vehicle v2 = new Vehicle(2);
 	Vehicle v3 = new Vehicle(3);
-	Leader l = new Leader();
 	int counter=0;
 	/**
 	 * Constructor.
@@ -53,6 +53,7 @@ public class PlatoonEnvironment extends DefaultEASSEnvironment{
 	 */
 	public void initialise() {
 		super.initialise();
+		
 		vehicles.add(v1);
 		vehicles.add(v2);
 		vehicles.add(v3);
@@ -81,31 +82,12 @@ public class PlatoonEnvironment extends DefaultEASSEnvironment{
 		// join from behind, j_pos == 0
 /*		j_pos.addTerm(new Literal("0"));
 		j_pos.addTerm(new NumberTermImpl(0)); */
-		addPercept("abstraction_follower"+ v3.getID(), j_pos);
-		
-		// according to j_pos value, leader add a percept about allowed_position
-		Literal allowed_p = new Literal("allowed_position");
-		allowed_p.addTerm(new Literal("follower1")); 
-/*		allowed_p.addTerm(new Literal("follower2")); */
-		// join from behind, allowed_position is 0
-/*		allowed_p.addTerm(new NumberTermImpl(0)); */
-		addPercept("abstraction_leader", allowed_p);
-		
-		Literal platoon_member2 = new Literal("platoon_m");
-		platoon_member2.addTerm(new Literal("leader"));
-		platoon_member2.addTerm(new Literal("follower1"));
-		addPercept("abstraction_leader", platoon_member2);
-
-		Literal platoon_member = new Literal("platoon_m");
-		platoon_member.addTerm(new Literal("follower1"));
-		platoon_member.addTerm(new Literal("follower2"));
-		addPercept("abstraction_leader", platoon_member);				
-		
+		addPercept("abstraction_follower"+ v3.getID(), j_pos);		
 	}
 
 	public void eachrun() {
 
-		counter++;
+		counter++;		
 		if(counter ==5){
 		for (Vehicle v: vehicles) {
 			
@@ -168,6 +150,7 @@ public class PlatoonEnvironment extends DefaultEASSEnvironment{
 			distance.addTerm(new NumberTermImpl(v.getDistance()));
 			addUniquePercept("abstraction_follower"+ v.getID(), "distance", distance);		
 
+		//	addMessage("follower"+ v.getID(), v.getLeaderMessage());
 			counter=0;
 			}
 			
@@ -265,5 +248,18 @@ public class PlatoonEnvironment extends DefaultEASSEnvironment{
 		   AJPFLogger.info("eass.mas.DefaultEASSEnvironment", agName + " done " + printAction(act));
 	   }
 	   return u;
-	  }	  		
+	  }
+	
+    public void executeSendAction(String agName, SendAction act) {
+    	Message m = act.getMessage(agName);
+ 		String r = m.getReceiver();
+ 		for(Vehicle v: vehicles){
+ 				if(agName.equals("follower"+ v.getID())){
+ 					v.sendMessage(r, m.toString());				
+ 				}
+ 		}
+//    	super.executeSendAction(agName, act);
+    }
+	
+	
 }
